@@ -1,4 +1,4 @@
-from config.config import TestData
+from config.environment import Environment
 from pages.BasePage import BasePage
 from selenium.webdriver.common.by import By
 
