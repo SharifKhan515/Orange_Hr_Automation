@@ -15,4 +15,4 @@ def login_with_credential(login_page, username, password):
 def verify_login(browser):
     home_page = HomePage(browser)
     welcome_text = home_page.get_welcome_text()
-    assertpy.assert_that(welcome_text).starts_with('Welcome')
+    assertpy.assert_that(welcome_text, description="Login Failed").starts_with('Welcome')
