@@ -1,6 +1,10 @@
 import json
+from datetime import datetime
+
+import allure
 import assertpy
 import pytest
+from allure_commons.types import AttachmentType
 
 from pytest_bdd import given
 from selenium import webdriver
@@ -13,12 +17,21 @@ from pages.LoginPage import LoginPage
 
 
 def pytest_addoption(parser):
+    """Capture command line arguments"""
     parser.addoption("--browser", action="store", default="", help="Provide browser. e.g: chrome or firefox")
     parser.addoption("--headless", action="store", default="", help="headless mode true or false")
 
 
+def pytest_bdd_step_error(request, feature, scenario, step, step_func, step_func_args, exception):
+    """Take screenshot after step failure and attach it to report"""
+    driver = step_func_args['browser']
+    allure.attach(driver.get_screenshot_as_png(), name=f'{step_func}_{datetime.today().strftime("%Y-%m-%d_%H:%M")}.png'
+                  .replace(" ", "_").replace("/", "_").replace("::", "__"), attachment_type=AttachmentType.PNG)
+
+
 @pytest.fixture
 def config(request, scope='session'):
+    """Reading config file and command line input"""
     supported_browser = ['chrome', 'firefox']
     provided_browser = request.config.getoption("--browser")
     provided_headless = request.config.getoption("--headless")
@@ -34,7 +47,8 @@ def config(request, scope='session'):
     elif provided_headless.lower() == 'true':
         config["headless"] = True
 
-    assertpy.assert_that(supported_browser, description=f'{config["browser"]} is not supported').contains(config["browser"])
+    assertpy.assert_that(supported_browser, description=f'{config["browser"]} is not supported').contains(
+        config["browser"])
     assertpy.assert_that(config["headless"], description=f'Provided value for headless is not boolean').is_type_of(bool)
 
     return config
@@ -51,7 +65,8 @@ def browser(config):
         opts = webdriver.FirefoxOptions()
         if config['headless']:
             opts.add_argument('headless')
-        web_driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=opts, service_log_path=Environment.FIREFOX_LOG_PATH)
+        web_driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=opts,
+                                       service_log_path=Environment.FIREFOX_LOG_PATH)
     else:
         raise Exception(f'Provide browser "{config["browser"]}" is not supported')
 
@@ -68,5 +83,5 @@ def navigate_to_login_page(browser):
 
 
 @given('Login as admin')
-def admin_login(login_page):
+def admin_login(browser, login_page):
     login_page.do_login(Environment.USER_NAME, Environment.PASSWORD)
