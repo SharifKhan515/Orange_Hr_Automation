@@ -11,12 +11,8 @@ class VacancyPage(BasePage):
     RESULT_TABLE_VACANCY = (By.XPATH, "//table[@id='resultTable']/tbody/tr/td[2]")
     RESULT_TABLE_JOB_TITLE = (By.XPATH, "//table[@id='resultTable']/tbody/tr/td[3]")
 
-    # RESULT_TABLE_JOB_TITLE = (By.XPATH, "./tbody/tr/td[3]")
-    # RESULT_TABLE_VACANCY = (By.XPATH, "./tbody/tr/td[2]")
-
     def __init__(self, driver):
         super().__init__(driver)
-        # self.driver = driver
 
     def set_job_title_from_dropdown(self, title):
         self.do_select_from_dropdown(self.JOB_TITLE_DROPDOWN, title)

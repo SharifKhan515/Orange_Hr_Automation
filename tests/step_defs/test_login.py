@@ -1,7 +1,7 @@
 from assertpy import assertpy
 from pytest_bdd import scenarios, when, then, parsers
-from pages.HomePage import HomePage
 
+from pages.HomePage import HomePage
 
 scenarios('../features/login.feature')
 

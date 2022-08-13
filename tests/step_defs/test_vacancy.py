@@ -1,5 +1,6 @@
 from assertpy import assertpy
 from pytest_bdd import scenarios, when, then, parsers, given
+
 from pages.HomePage import HomePage
 from pages.VacancyPage import VacancyPage
 
