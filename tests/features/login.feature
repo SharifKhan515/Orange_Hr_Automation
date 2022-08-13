@@ -11,5 +11,4 @@ Feature: Login feature
     Then I should see Welcome text
     Examples:
     | username | password     |
-    | Admin    | @qPJ@X7@2gPp |
     | Admin    | admin123     |
