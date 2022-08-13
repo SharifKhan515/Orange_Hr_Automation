@@ -1,13 +1,13 @@
 from assertpy import assertpy
 from pytest_bdd import scenarios, when, then, parsers
-from pages.HomePage import HomePage
 
+from pages.HomePage import HomePage
 
 scenarios('../features/login.feature')
 
 
 @when(parsers.parse('I enter "{username}" in user field "{password}" in password field and click login'))
-def login_with_credential(login_page, username, password):
+def login_with_credential(browser, login_page, username, password):
     login_page.do_login(username, password)
 
 

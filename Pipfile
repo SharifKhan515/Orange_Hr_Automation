@@ -10,6 +10,7 @@ pytest = "*"
 pytest-bdd = "*"
 sttable = "*"
 assertpy = "*"
+allure-pytest = "*"
 
 [dev-packages]
 

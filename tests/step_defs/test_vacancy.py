@@ -1,5 +1,6 @@
 from assertpy import assertpy
 from pytest_bdd import scenarios, when, then, parsers, given
+
 from pages.HomePage import HomePage
 from pages.VacancyPage import VacancyPage
 
@@ -14,17 +15,17 @@ def click_vacancy_by_hovering_over_recruitment(browser):
 
 
 @when(parsers.parse('I applied filter "{job_title}" in Job Title field'))
-def apply_filter(vacancy_page, job_title):
+def apply_filter(browser, vacancy_page, job_title):
     vacancy_page.set_job_title_from_dropdown(job_title)
 
 
 @when('I click on search button')
-def click_search(vacancy_page):
+def click_search(browser, vacancy_page):
     vacancy_page.click_search()
 
 
 @then(parsers.parse('I should see atleast one vacancy for Job title "{job_title}"'))
-def click_search(vacancy_page, job_title):
+def click_search(browser, vacancy_page, job_title):
     assertpy.assert_that(vacancy_page.result_table_has_entry(),
                          description=f'Result Not Found in Result Table for {job_title}').is_true()
     vacancy_list = vacancy_page.get_job_title_list_from_result()

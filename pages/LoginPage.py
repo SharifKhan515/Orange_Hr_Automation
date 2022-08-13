@@ -1,6 +1,6 @@
-from config.environment import Environment
-from pages.BasePage import BasePage
 from selenium.webdriver.common.by import By
+
+from pages.BasePage import BasePage
 
 
 class LoginPage(BasePage):
@@ -10,7 +10,6 @@ class LoginPage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
-
 
     def set_user(self, username):
         self.do_send_keys(self.USER, username)
