@@ -1,11 +1,6 @@
 import json
-from datetime import datetime
-
-import allure
 import assertpy
 import pytest
-from allure_commons.types import AttachmentType
-
 from pytest_bdd import given
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -14,6 +9,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 
 from config.environment import Environment
 from pages.LoginPage import LoginPage
+from utility.logger import *
 
 
 def pytest_addoption(parser):
@@ -22,11 +18,15 @@ def pytest_addoption(parser):
     parser.addoption("--headless", action="store", default="", help="headless mode true or false")
 
 
+def pytest_bdd_after_step(request, feature, scenario, step, step_func, step_func_args):
+    log_message(f'{step} executed successfully')
+
+
 def pytest_bdd_step_error(request, feature, scenario, step, step_func, step_func_args, exception):
-    """Take screenshot after step failure and attach it to report"""
+    """Take screenshot after step failure and attach screenshot and log to report"""
     driver = step_func_args['browser']
-    allure.attach(driver.get_screenshot_as_png(), name=f'{step_func}_{datetime.today().strftime("%Y-%m-%d_%H:%M")}.png'
-                  .replace(" ", "_").replace("/", "_").replace("::", "__"), attachment_type=AttachmentType.PNG)
+    log_message(f'{step_func} is failed', "error")
+    attach_screenshot(driver, step_func)
 
 
 @pytest.fixture
