@@ -62,7 +62,8 @@ The Webdriver-Manager plugin also has support for Edge, Opera and Internet Explo
 
 ##  Execute Test
 
-To run the project first make sure you have python installed in your system if not please install python.
+To run the project first make sure you have python installed in your system if not please install python. this code is written using python 3.8.so you need python 3.8 to run this project. if you want to run the project with other version then edit the pipfile python version though it is not recommended because it may lead to some other version mismatch issue.
+
  As Pipenv is being used for dependency management. you can install the dependency by move to root directory of the project where pipfile is located and run using  command
  
     pipenv install
