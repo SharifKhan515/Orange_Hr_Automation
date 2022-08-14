@@ -2,7 +2,7 @@
 
 # Orange_Hr_Automation: Pytest-bdd with Page Object Model
 
-OrangeHr Automation is a test automation project. Login and Vacancy page filter test is automated as part of this project. Website is  in test is [OrangeHr](https://opensource-demo.orangehrmlive.com/index.php/dashboard)
+OrangeHr Automation is a test automation project. Website is  in test is [OrangeHr](https://opensource-demo.orangehrmlive.com/index.php/dashboard).Login and Vacancy page filter test is automated as part of this project
 
 This project provides an example for testing a UI with Selenium WebDriver, using the Page Object Model design pattern and driven via BDD feature files through Pytest BDD.
 
