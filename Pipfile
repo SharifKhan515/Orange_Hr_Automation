@@ -11,6 +11,7 @@ pytest-bdd = "*"
 sttable = "*"
 assertpy = "*"
 allure-pytest = "*"
+certifi = "*"
 
 [dev-packages]
 
