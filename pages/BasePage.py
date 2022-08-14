@@ -28,6 +28,7 @@ class BasePage:
 
     def do_select_from_dropdown(self, by_locator, option, explicit_wait=Environment.EXPLICIT_WAIT):
         element = WebDriverWait(self.driver, explicit_wait).until(EC.visibility_of_element_located(by_locator))
+        element.click()
         select = Select(element)
         select.select_by_visible_text(option)
 
