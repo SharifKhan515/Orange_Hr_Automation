@@ -64,9 +64,8 @@ def browser(config):
     elif config["browser"] == "firefox":
         opts = webdriver.FirefoxOptions()
         if config['headless']:
-            opts.add_argument('headless')
-        web_driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=opts,
-                                       service_log_path=Environment.FIREFOX_LOG_PATH)
+            opts.headless = True
+        web_driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=opts)
     else:
         raise Exception(f'Provide browser "{config["browser"]}" is not supported')
 
